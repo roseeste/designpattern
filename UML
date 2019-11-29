@@ -1,0 +1,123 @@
+@startuml
+
+class Devise{
+    {field} code:char(4);
+    zone : string;
+    monnaie : string;
+    +getCode() const : string;
+    +getMonnaie() const : const string&;
+    +getZoneGeographiqe() const : const string&;
+}
+
+class PaireDevises{
+    base: const Devise*;
+    contrepartie : const Devise*;
+    surnom : string;
+    +getBase() const : const Devise&;
+    +getContrepartie() const : const Devise&;
+    +getSurnom() const : const string&;
+}
+
+class CoursOHLC{
+    open : double;
+    high : double;
+    low : double;
+    close : double;
+    volume : double;
+    +getOpen() const : double;
+    +getHigh() const : double;
+    +getLow() const : double;
+    +getClose() const : double;
+    +getVolume() const : double;
+}
+class EvolutionCours{
+    paire : const PaireDevise&;
+    cours : CoursOHLC*
+    nbMaxCours : unsigned int;
+    nbCours : unsigned int;
+    +addCours(o : double, h:double, l:double, c:double) : void;
+}
+
+class DevisesManager{
+    devises: Devise**
+    paires : PaireDevises**
+    nbMaxDevises: int
+    nbDevises: int
+    nbMaxPaires : int
+    nbPaires: int
+    +creationDevise(c : const string& , m ; const string& m, z: const string&) : const Devise&
+    +getDevise(...): const Devise&
+    +getPairesDevises(...): const PaireDevises&
+}
+class Bougie{
+    emum class Couleur {rouge,vert}
+    getForme() : string
+    getCouleur() : Couleur
+    cours : const CoursOHLC&
+    couleur : Couleur
+}
+
+class Formes{
+
+}
+
+class Toupies{
+
+}
+
+class Verte{
+
+couleur : verte
+
+}
+
+class Rouge{
+
+couleur :rouge
+
+}
+
+class Doji{
+
+    forme: doji
+}
+
+class Marteau{
+    forme:marteau
+}
+
+class Pendu{
+    forme:pendu
+}
+
+class EtoileFilante{
+    forme :etoilefilante
+}
+
+class Graphique_chandelier{
+
+}
+
+class Graphique_barres{
+
+}
+
+
+Formes <|--Toupies
+Pendu..>Toupies :instance de
+EtoileFilante..>Toupies:instance de
+Marteau..>Toupies:instance de
+Doji..>Toupies :instance de
+Verte..>Bougie : instance de
+Rouge ..>Bougie :instance de 
+Formes"*"--"*"Bougie
+PaireDevises "*" --* DevisesManager
+Devise "*" --* DevisesManager
+Devise "2" --o PaireDevises
+PaireDevises "1" -- "*" CoursOHLC
+EvolutionCours *-- "*" CoursOHLC
+Bougie "*" --o "1" CoursOHLC
+Graphique_chandelier*--"1..*"Bougie
+
+@enduml
+

@@ -1,0 +1,3 @@
+Tester l'editeur de texte révolutionnaire
+avec ce fichier
+écrit sur plusieurs lignes !
